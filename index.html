@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<title>Notes App</title>
+</head>
+
+<body>
+	<div class="container bg-dark py-3">
+		<div class="container-sm">
+			<form id="new-note-form">
+				<h1 class="text-center text-white">Notes app</h1>
+				<div class="d-flex-column align-items-center py-3">
+					<input class="form-control w-25 mx-auto mb-2" id="title" placeholder="Note title" />
+					<input class="form-control w-25 mx-auto mb-2" id="body" placeholder="Note body" />
+					<div class="text-center text-white mb-2">
+						<input class="form-check-input" type="checkbox" value="" id="important">
+						<label class="form-check-label" for="note-important">
+							Important
+						</label>
+					</div>
+					<button type="submit" class="btn btn-primary d-block mx-auto">Add note</button>
+			</form>
+		</div>
+
+		<ul class="list-group" id="note-container">
+
+		</ul>
+	</div>
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-firestore.js"></script>
+	<script src="dbinit.js"></script>
+	<script src="api.js"></script>
+	<script src="ui.js"></script>
+	<script src="app.js"></script>
+</body>
+
+</html>
