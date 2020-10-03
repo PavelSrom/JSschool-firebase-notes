@@ -9,7 +9,7 @@ class API {
 
     try {
       const res = await db.collection('notes').get()
-      const data = res.docs.map(doc => doc.data())
+      const data = res.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 
       API.notes = data
       console.log(API.notes)
@@ -37,6 +37,19 @@ class API {
        * to refetch the notes again => bad for performance, bad for UX
        */
       await this.getNotes()
+    } catch (err) {
+      API.error = err
+    } finally {
+      API.loading = false
+    }
+  }
+
+  static deleteNote = async id => {
+    API.loading = true
+
+    try {
+      await db.collection('notes').doc(id).delete()
+      await this.getNotes() // refetch :(
     } catch (err) {
       API.error = err
     } finally {

@@ -21,13 +21,16 @@ class UI {
   renderNotes(notes) {
     let html = ''
 
-    notes.forEach(({ title, body, important }) => {
+    notes.forEach(({ id, title, body, important }) => {
       html += `
-				<li class="list-group-item">
+				<li data-id="${id}" class="list-group-item">
 					<div class="d-flex justify-content-between align-items-center">
 						<div>
 							<h5>${title}</h5>
 							<p>${body}</p>
+						</div>
+						<div class="d-flex">
+							<button class="btn btn-danger">Delete</button>
 						</div>
 					</div>
 				</li>
