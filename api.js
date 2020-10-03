@@ -12,7 +12,6 @@ class API {
       const data = res.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 
       API.notes = data
-      console.log(API.notes)
     } catch (err) {
       API.error = err
     } finally {
@@ -36,7 +35,7 @@ class API {
        * standard API would do, that sucks and I have to make an extra request
        * to refetch the notes again => bad for performance, bad for UX
        */
-      await this.getNotes()
+      await API.getNotes()
     } catch (err) {
       API.error = err
     } finally {
@@ -49,8 +48,23 @@ class API {
 
     try {
       await db.collection('notes').doc(id).delete()
-      await this.getNotes() // refetch :(
+      await API.getNotes() // refetch :(
     } catch (err) {
+      API.error = err
+    } finally {
+      API.loading = false
+    }
+  }
+
+  static updateNote = async (id, dataToUpdate) => {
+    API.loading = true
+
+    try {
+      await db.collection('notes').doc(id).update(dataToUpdate)
+      await API.getNotes() // refetch :(
+      console.log('updated successfully...')
+    } catch (err) {
+      console.log(err)
       API.error = err
     } finally {
       API.loading = false

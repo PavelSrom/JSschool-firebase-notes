@@ -8,19 +8,40 @@ ui.note.form.addEventListener('submit', async e => {
   ui.renderNotes(API.notes)
 })
 
+const updateNote = async (e, id, data) => {
+  e.preventDefault()
+
+  await API.updateNote(id, data)
+}
+
 ui.note.noteContainer.addEventListener('click', async e => {
-  console.log('notes clicked')
   if (e.target.tagName === 'BUTTON') {
-    const idToDelete = e.target.parentElement.parentElement.parentElement.getAttribute(
+    const idToManipulate = e.target.parentElement.parentElement.parentElement.getAttribute(
       'data-id'
     )
+    if (e.target.classList.contains('btn-success')) {
+      // you clicked on 'update'
+      ui.noteUpdateForm.addEventListener('submit', e => {
+        const dataToUpdate = {
+          title: ui.noteUpdateForm.updateTitle.value,
+          body: ui.noteUpdateForm.updateBody.value,
+          important: ui.noteUpdateForm.updateImportant.checked,
+        }
 
-    await API.deleteNote(idToDelete)
+        updateNote(e, idToManipulate, dataToUpdate)
+      })
+      // remove listener to prevent memory leaks
+      ui.noteUpdateForm.removeEventListener('submit', updateNote)
+    } else {
+      // you clicked on 'delete'
+      await API.deleteNote(idToManipulate)
+    }
+
+    // re-render after state change
     ui.renderNotes(API.notes)
   }
 })
 ;(async () => {
   await API.getNotes()
-  console.log(API.notes)
   ui.renderNotes(API.notes)
 })()

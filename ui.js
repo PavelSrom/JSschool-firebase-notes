@@ -8,10 +8,7 @@ class UI {
       text: document.getElementById('search-input'),
       submitBtn: document.getElementById('search-btn'),
     }
-    this.noteItem = {
-      deleteBtn: document.getElementById('note-delete'),
-      editBtn: document.getElementById('note-edit'),
-    }
+    this.noteUpdateForm = document.getElementById('note-update-form')
   }
 
   /**
@@ -28,15 +25,16 @@ class UI {
 						<div>
 							<h5>${title}</h5>
 							<p>${body}</p>
+							${important ? '<p class="text-danger">Important note!</p>' : ''}
 						</div>
 						<div class="d-flex">
+							<button class="btn btn-success mr-2" data-toggle="modal" data-target="#updateModal">Update</button>
 							<button class="btn btn-danger">Delete</button>
 						</div>
 					</div>
 				</li>
 			`
     })
-    console.log(html)
 
     this.note.noteContainer.innerHTML = html
   }
