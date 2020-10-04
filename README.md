@@ -6,6 +6,7 @@ Created as a school project submission
 - All CRUD operations with Firebase supported
 - Allowing for searching and filtering notes
 - Bootstrap used to build the UI
+- Because Bootstrap modal doesn't close on form submission, you have to click 'Save changes' and then close it manually
 
 ## Folder structure
 
