@@ -75,7 +75,6 @@ class API {
       await db.collection('notes').doc(id).update(dataToUpdate)
       await API.getNotes() // refetch :(
     } catch (err) {
-      console.log(err)
       API.error = err
     } finally {
       API.loading = false

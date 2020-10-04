@@ -12,8 +12,8 @@ class UI {
   }
 
   /**
-   * sure, there could be more methods to update the UI faster and more efficiently,
-   * but I'm too lazy to do that ;) we have React
+   * update the UI with the current state snapshot
+   * @param {Note[]} notes
    */
   renderNotes(notes) {
     let html = ''
