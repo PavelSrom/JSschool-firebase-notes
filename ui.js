@@ -6,7 +6,7 @@ class UI {
     }
     this.search = {
       text: document.getElementById('search-input'),
-      submitBtn: document.getElementById('search-btn'),
+      important: document.getElementById('only-important'),
     }
     this.noteUpdateForm = document.getElementById('note-update-form')
   }

@@ -12,67 +12,81 @@
 <body>
 	<div class="container bg-dark py-3">
 		<div class="container-sm">
-			<form id="new-note-form">
-				<h1 class="text-center text-white">Notes app</h1>
-				<div class="d-flex-column align-items-center py-3">
-					<input class="form-control w-25 mx-auto mb-2" id="title" placeholder="Note title" />
-					<input class="form-control w-25 mx-auto mb-2" id="body" placeholder="Note body" />
-					<div class="text-center text-white mb-2">
-						<input class="form-check-input" type="checkbox" value="" id="important">
-						<label class="form-check-label" for="note-important">
-							Important
-						</label>
-					</div>
-					<button type="submit" class="btn btn-primary d-block mx-auto">Add note</button>
-			</form>
-		</div>
-
-		<ul class="list-group" id="note-container"></ul>
-
-		<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<form class="modal-content" id="note-update-form">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Update note</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<input class="form-control mb-2" id="updateTitle" placeholder="New title" />
-						<input class="form-control mb-2" id="updateBody" placeholder="New body" />
-						<div class="mx-auto w-50">
-							<input class="form-check-input" type="checkbox" value="" id="updateImportant">
-							<label class="form-check-label" for="updateImportant">
+			<h1 class="text-center text-white">Notes app</h1>
+			<div class="d-flex justify-content-between mb-5">
+				<div class="d-flex-column align-items-center py-3 w-50">
+					<h5 class="text-center text-white">Create new note</h5>
+					<form id="new-note-form">
+						<input class="form-control w-75 mx-auto mb-2" id="title" placeholder="Note title" />
+						<input class="form-control w-75 mx-auto mb-2" id="body" placeholder="Note body" />
+						<div class="text-center text-white mb-2">
+							<input class="form-check-input" type="checkbox" value="" id="important">
+							<label class="form-check-label" for="note-important">
 								Important
 							</label>
 						</div>
+						<button type="submit" class="btn btn-primary d-block mx-auto">Add note</button>
+					</form>
+				</div>
+				<div class="w-50 py-3">
+					<h5 class="text-center text-white">Search notes</h5>
+					<input class="form-control w-75 mx-auto mb-2" id="search-input" placeholder="Enter name" />
+					<div class="text-center text-white mb-2">
+						<input class="form-check-input" type="checkbox" value="" id="only-important">
+						<label class="form-check-label" for="only-important">
+							See only important
+						</label>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="submit" id="update-submit-btn" class="btn btn-primary">Save changes</button>
-					</div>
-				</form>
+				</div>
+			</div>
+
+			<ul class="list-group" id="note-container"></ul>
+
+			<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<form class="modal-content" id="note-update-form">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Update note</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<input class="form-control mb-2" id="updateTitle" placeholder="New title" />
+							<input class="form-control mb-2" id="updateBody" placeholder="New body" />
+							<div class="mx-auto w-50">
+								<input class="form-check-input" type="checkbox" value="" id="updateImportant">
+								<label class="form-check-label" for="updateImportant">
+									Important
+								</label>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="submit" id="update-submit-btn" class="btn btn-primary">Save changes</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-		crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-		crossorigin="anonymous"></script>
-	<!-- The core Firebase JS SDK is always required and must be listed first -->
-	<script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-firestore.js"></script>
-	<script src="dbinit.js"></script>
-	<script src="api.js"></script>
-	<script src="ui.js"></script>
-	<script src="app.js"></script>
+		<!-- bootstrap scripts -->
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+			crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+			integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+			crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+			integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+			crossorigin="anonymous"></script>
+		<!-- The core Firebase JS SDK is always required and must be listed first -->
+		<script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-firestore.js"></script>
+		<script src="dbinit.js"></script>
+		<script src="api.js"></script>
+		<script src="ui.js"></script>
+		<script src="app.js"></script>
 </body>
 
 </html>

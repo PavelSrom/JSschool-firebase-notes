@@ -8,6 +8,7 @@ ui.note.form.addEventListener('submit', async e => {
   ui.renderNotes(API.notes)
 })
 
+// event handler separately to later remove the listener
 const updateNote = async (e, id, data) => {
   e.preventDefault()
 
@@ -40,6 +41,27 @@ ui.note.noteContainer.addEventListener('click', async e => {
     // re-render after state change
     ui.renderNotes(API.notes)
   }
+})
+
+ui.search.important.addEventListener('change', e => {
+  // update state
+  const onlyImportantNotes = API.notes.filter(({ important }) => important)
+  // update UI
+  ui.renderNotes(e.target.checked ? onlyImportantNotes : API.notes)
+})
+
+/**
+ * filtering data should always happen on the backend
+ */
+ui.search.text.addEventListener('input', e => {
+  const query = e.target.value
+
+  // update state
+  const filteredNotes = API.notes.filter(
+    ({ title, body }) => title.startsWith(query) || body.startsWith(query)
+  )
+  // update UI
+  ui.renderNotes(filteredNotes)
 })
 ;(async () => {
   await API.getNotes()
