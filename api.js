@@ -2,8 +2,10 @@ class API {
   static error = false
   static loading = false
   static notes = []
-  static searchNotes = []
 
+  /**
+   * fetch all notes
+   */
   static getNotes = async () => {
     API.loading = true
 
@@ -19,6 +21,12 @@ class API {
     }
   }
 
+  /**
+   * create a new note
+   * @param {string} title
+   * @param {string} body
+   * @param {boolean} important
+   */
   static createNote = async (title, body, important) => {
     API.loading = true
 
@@ -30,12 +38,7 @@ class API {
         createdAt: Date.now(),
       })
 
-      /**
-       * if firebase doesn't return the newly created note, just like any
-       * standard API would do, that sucks and I have to make an extra request
-       * to refetch the notes again => bad for performance, bad for UX
-       */
-      await API.getNotes()
+      await API.getNotes() // refetch :(
     } catch (err) {
       API.error = err
     } finally {
@@ -43,6 +46,10 @@ class API {
     }
   }
 
+  /**
+   * delete an existing note
+   * @param {string} id
+   */
   static deleteNote = async id => {
     API.loading = true
 
@@ -56,13 +63,17 @@ class API {
     }
   }
 
+  /**
+   * update an existing note
+   * @param {string} id
+   * @param {Note} dataToUpdate
+   */
   static updateNote = async (id, dataToUpdate) => {
     API.loading = true
 
     try {
       await db.collection('notes').doc(id).update(dataToUpdate)
       await API.getNotes() // refetch :(
-      console.log('updated successfully...')
     } catch (err) {
       console.log(err)
       API.error = err

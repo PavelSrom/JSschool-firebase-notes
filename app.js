@@ -1,5 +1,8 @@
 const ui = new UI()
 
+/**
+ * onSubmit handler for new note form
+ */
 ui.note.form.addEventListener('submit', async e => {
   e.preventDefault()
   const { title, body, important } = ui.note.form
@@ -8,7 +11,10 @@ ui.note.form.addEventListener('submit', async e => {
   ui.renderNotes(API.notes)
 })
 
-// event handler separately to later remove the listener
+/**
+ * onClick handler for note container to detect button presses
+ * 'updateNote' separate event handler to be used later for removing the listener
+ */
 const updateNote = async (e, id, data) => {
   e.preventDefault()
 
@@ -43,6 +49,9 @@ ui.note.noteContainer.addEventListener('click', async e => {
   }
 })
 
+/**
+ * onChange handler for 'important' checkbox
+ */
 ui.search.important.addEventListener('change', e => {
   // update state
   const onlyImportantNotes = API.notes.filter(({ important }) => important)
@@ -51,7 +60,8 @@ ui.search.important.addEventListener('change', e => {
 })
 
 /**
- * filtering data should always happen on the backend
+ * OBS: filtering data should happen on the backend
+ * onChange handler for search input
  */
 ui.search.text.addEventListener('input', e => {
   const query = e.target.value
